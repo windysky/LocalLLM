@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalLLM Admin Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            margin-top: -20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .tab:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .model-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+            transition: all 0.3s;
+        }
+
+        .model-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .model-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .model-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-downloaded {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-loaded {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-not-downloaded {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .model-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .model-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            min-width: 300px;
+            align-items: center;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+            font-weight: 500;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #5a6fd8;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover:not(:disabled) {
+            background-color: #c82333;
+        }
+
+        .btn-downloading {
+            background-color: #17a2b8;
+            color: white;
+            min-width: 280px;
+            text-align: center;
+            font-size: 14px;
+            padding: 8px 20px;
+            white-space: nowrap;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .btn-warning:hover:not(:disabled) {
+            background-color: #e0a800;
+        }
+
+        .search-section {
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+
+        .search-result-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .search-result-meta {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .system-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #667eea;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        /* Settings Styles */
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .settings-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .setting-item label {
+            font-weight: bold;
+            min-width: 150px;
+        }
+
+        .setting-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .setting-description {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .setting-description a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .setting-description a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification Styles */
+        #notificationArea {
+            margin: 20px 0;
+        }
+
+        .notification {
+            padding: 15px;
+            border-radius: 8px;
+            position: relative;
+            max-width: 800px;
+            word-wrap: break-word;
+        }
+
+        .notification.error {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+        }
+
+        .notification.success {
+            background-color: #efe;
+            border: 1px solid #cfc;
+            color: #3c3;
+        }
+
+        .notification.info {
+            background-color: #eef;
+            border: 1px solid #ccf;
+            color: #33c;
+        }
+
+        .notification-close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🤖 LocalLLM Admin Dashboard</h1>
+            <p class="subtitle">Manage your local language models and monitor system performance</p>
+
+            <!-- Notification Area -->
+            <div id="notificationArea" style="display: none;">
+                <div class="notification" id="notification">
+                    <button class="notification-close" onclick="hideNotification()">×</button>
+                    <pre id="notificationText" style="margin: 0; white-space: pre-wrap; font-family: monospace;"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalModels">0</div>
+                <div class="stat-label">Total Models</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="downloadedModels">0</div>
+                <div class="stat-label">Downloaded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="loadedModels">0</div>
+                <div class="stat-label">Loaded</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="diskUsage">0 GB</div>
+                <div class="stat-label">Disk Usage</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('models')">📦 Models</button>
+            <button class="tab" onclick="showTab('search')">🔍 Discover</button>
+            <button class="tab" onclick="showTab('system')">⚙️ System</button>
+        </div>
+
+        <!-- Models Tab -->
+        <div id="models-tab" class="tab-content active">
+            <div class="card">
+                <h2>📦 Model Inventory</h2>
+                <div id="modelGrid" class="model-grid">
+                    <div class="loading">Loading models...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Tab -->
+        <div id="search-tab" class="tab-content">
+            <div class="card">
+                <h2>🔍 Discover Models on Hugging Face</h2>
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" class="search-input"
+                               placeholder="Search models on Hugging Face (e.g., 'phi', 'codellama', 'tinyllama')">
+                        <button class="btn-primary" onclick="searchModels()">Search</button>
+                    </div>
+                    <div id="searchResults" class="search-results" style="display: none;">
+                        <!-- Search results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Tab -->
+        <div id="system-tab" class="tab-content">
+            <div class="card">
+                <h2>⚙️ System Settings</h2>
+
+                <div class="settings-section">
+                    <h3>🔑 Hugging Face Authentication</h3>
+                    <div class="setting-item">
+                        <label for="hfToken">HUGGINGFACE_TOKEN:</label>
+                        <input type="password" id="hfToken" placeholder="Enter your Hugging Face token" class="setting-input">
+                        <button onclick="saveHfToken()" class="btn-primary btn-small">Save</button>
+                    </div>
+                    <div class="setting-description">
+                        <p>Required for downloading gated models like gemma-2-9b and llama-3.1-8b.</p>
+                        <p>Get your token from: <a href="https://huggingface.co/settings/tokens" target="_blank">https://huggingface.co/settings/tokens</a></p>
+                        <p><strong>Note:</strong> After saving, you need to restart the server for the token to take effect.</p>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>📊 System Information</h3>
+                    <div class="system-info" id="systemInfo">
+                        <div class="loading">Loading system info...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Model Modal -->
+    <div id="addModelModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Add New Model</h2>
+            <div id="modalBody">
+                <!-- Modal content will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000'; // Main LLM server runs on port 8000
+        let currentModels = [];
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadModels();
+            setInterval(loadModels, 10000); // Refresh every 10 seconds
+        });
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+
+            // Load tab-specific content
+            if (tabName === 'system') {
+                loadSystemInfo();
+            }
+        }
+
+        async function loadModels() {
+            try {
+                const response = await fetch(API_BASE + '/models/status');
+                const data = await response.json();
+
+                currentModels = data.available || [];
+                const loaded = data.loaded || [];
+
+                // Create downloaded object from models with "downloaded" status
+                const downloaded = {};
+                currentModels.forEach(model => {
+                    if (model.status === 'downloaded') {
+                        downloaded[model.name] = {
+                            size_gb: model.size_gb
+                        };
+                    }
+                });
+
+                // Update stats
+                document.getElementById('totalModels').textContent = currentModels.length;
+                document.getElementById('downloadedModels').textContent = Object.keys(downloaded).length;
+                document.getElementById('loadedModels').textContent = loaded.length;
+
+                // Calculate disk usage
+                let totalSize = 0;
+                for (const [name, info] of Object.entries(downloaded)) {
+                    if (info.size_gb && info.size_gb !== 'N/A') {
+                        totalSize += parseFloat(info.size_gb);
+                    }
+                }
+                document.getElementById('diskUsage').textContent = `${totalSize.toFixed(1)} GB`;
+
+                // Render model grid
+                renderModels(currentModels, downloaded, loaded);
+
+            } catch (error) {
+                console.error('Failed to load models:', error);
+                document.getElementById('modelGrid').innerHTML =
+                    '<div class="loading">Failed to load models. Is the server running?<br><small>Error: ' + error.message + '</small></div>';
+            }
+        }
+
+        function renderModels(models, downloaded, loaded) {
+            const grid = document.getElementById('modelGrid');
+
+            if (models.length === 0) {
+                grid.innerHTML = '<div class="loading">No models available</div>';
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            // Create and append each model card
+            models.forEach(model => {
+                const isDownloaded = model.name in downloaded;
+                const isLoaded = loaded.some(m => m.name === model.name);
+                const info = downloaded[model.name] || {};
+
+                const modelCard = document.createElement('div');
+                modelCard.className = 'model-card';
+
+                // Model name and status
+                const modelNameDiv = document.createElement('div');
+                modelNameDiv.className = 'model-name';
+                modelNameDiv.textContent = model.name;
+                modelCard.appendChild(modelNameDiv);
+
+                // Status badge
+                const statusSpan = document.createElement('span');
+                statusSpan.className = 'model-status ' +
+                    (isLoaded ? 'status-loaded' : isDownloaded ? 'status-downloaded' : 'status-not_downloaded');
+                statusSpan.textContent =
+                    isLoaded ? 'Loaded' :
+                    isDownloaded ? 'Downloaded' : 'Not Downloaded';
+                modelCard.appendChild(statusSpan);
+
+                // Meta info
+                const metaDiv = document.createElement('div');
+                metaDiv.className = 'model-meta';
+                metaDiv.innerHTML = 'Type: ' + (model.type || 'Unknown') + '<br>';
+                if (info.size_gb) {
+                    metaDiv.innerHTML += 'Size: ' + info.size_gb + ' GB';
+                }
+                modelCard.appendChild(metaDiv);
+
+                // Actions container
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'model-actions';
+
+                if (!isDownloaded) {
+                    // Just show download button for all models
+                    // The server will handle authentication with the saved token
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'btn-primary';
+                    downloadBtn.textContent = 'Download';
+                    downloadBtn.id = 'download-' + model.name;
+                    downloadBtn.onclick = () => downloadModel(model.name);
+                    actionsDiv.appendChild(downloadBtn);
+                } else if (isLoaded) {
+                    const unloadBtn = document.createElement('button');
+                    unloadBtn.className = 'btn-warning';
+                    unloadBtn.textContent = 'Unload';
+                    unloadBtn.onclick = () => unloadModel(model.name);
+                    actionsDiv.appendChild(unloadBtn);
+                } else {
+                    const loadBtn = document.createElement('button');
+                    loadBtn.className = 'btn-success';
+                    loadBtn.textContent = 'Load';
+                    loadBtn.onclick = () => loadModel(model.name);
+                    actionsDiv.appendChild(loadBtn);
+                }
+
+                if (isDownloaded && !isLoaded) {
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'btn-danger';
+                    removeBtn.textContent = 'Remove from Disk';
+                    removeBtn.onclick = () => removeModel(model.name);
+                    actionsDiv.appendChild(removeBtn);
+                }
+
+                modelCard.appendChild(actionsDiv);
+                grid.appendChild(modelCard);
+            });
+        }
+
+        async function downloadModel(modelName) {
+            const button = document.getElementById('download-' + modelName);
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Downloading...';
+            }
+
+            try {
+                const response = await fetch(API_BASE + '/models/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: modelName })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showInfo('✅ Downloading ' + modelName + ' started!\n\nThis may take several minutes.');
+
+                    // Check progress periodically
+                    const checkInterval = setInterval(async () => {
+                        try {
+                            console.log('Checking download progress for', modelName);
+                            const progressResponse = await fetch(API_BASE + '/models/download/' + encodeURIComponent(modelName) + '/progress');
+                            const progressData = await progressResponse.json();
+                            console.log('Progress data:', progressData);
+
+                            if (progressData.status === 'completed') {
+                                console.log('Download completed for', modelName);
+                                clearInterval(checkInterval);
+                                showSuccess('✅ ' + modelName + ' downloaded successfully!');
+                                loadModels();
+                            } else if (progressData.status === 'failed') {
+                                console.log('Download failed for', modelName, progressData.message);
+                                clearInterval(checkInterval);
+                                showError('❌ Failed to download ' + modelName + ':\n' + progressData.message);
+                                loadModels();
+                            } else if (progressData.status === 'downloading') {
+                                // Update button with progress
+                                console.log('Download in progress for', modelName, ':', progressData.progress + '%');
+                                if (button) {
+                                    button.textContent = `Downloading... ${progressData.progress}%`;
+                                    button.className = 'btn-downloading';
+                                    console.log('Updated button text to:', button.textContent);
+                                }
+                            }
+                        } catch (e) {
+                            console.error('Error checking progress:', e);
+                        }
+                    }, 2000); // Check every 2 seconds for smoother updates
+
+                    // Stop checking after 5 minutes
+                    setTimeout(() => clearInterval(checkInterval), 300000);
+
+                } else {
+                    // Check if this is actually a success message (model already downloaded)
+                    if (result.message && result.message.includes('already downloaded')) {
+                        showSuccess('✅ ' + modelName + ' is already downloaded!');
+                        loadModels();
+                        if (button) {
+                            button.disabled = false;
+                            button.textContent = 'Download';
+                            button.className = 'btn-download';
+                        }
+                        return;
+                    }
+
+                    const errorMsg = result.detail || result.message || 'Unknown error';
+                    let fullErrorMessage = '❌ Failed to download ' + modelName + ':\n' + errorMsg;
+
+                    // Add specific help based on error
+                    if (errorMsg.includes('403') || errorMsg.includes('not authorized') || errorMsg.includes('restricted')) {
+                        fullErrorMessage += '\n\n📋 This model requires access approval:\n';
+                        fullErrorMessage += '1. Visit the model page on Hugging Face\n';
+                        fullErrorMessage += '2. Click "Request access" and accept the license terms\n';
+                        fullErrorMessage += '3. Wait for approval (usually immediate)\n';
+                        fullErrorMessage += '4. Try downloading again';
+                    } else if (errorMsg.includes('401') || errorMsg.includes('authenticated')) {
+                        fullErrorMessage += '\n\n🔑 Authentication required:\n';
+                        fullErrorMessage += '1. Save your Hugging Face token in System tab\n';
+                        fullErrorMessage += '2. Ensure you have been granted access\n';
+                        fullErrorMessage += '3. Restart the server and try again';
+                    }
+
+                    showError(fullErrorMessage);
+
+                    if (button) {
+                        button.disabled = false;
+                        button.textContent = 'Download';
+                        button.className = 'btn-primary';
+                    }
+                }
+            } catch (error) {
+                showError('❌ Error downloading model: ' + error.message);
+
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = 'Download';
+                    button.className = 'btn-primary';
+                }
+            }
+        }
+
+        function showAuthWarning(modelName) {
+            const repoUrl = 'https://huggingface.co/' + getModelRepoId(modelName);
+            const userAction = confirm('🔒 Authentication Required for ' + modelName + '\n\n' +
+                  'This model requires access to Hugging Face.\n\n' +
+                  'Click OK to open the Hugging Face page to request access');
+
+            if (userAction) {
+                window.open(repoUrl, '_blank');
+            }
+        }
+
+        function getModelRepoId(modelName) {
+            const repoMap = {
+                'gemma-2-9b': 'google/gemma-2-9b-it',
+                'gemma-2-9b-it': 'google/gemma-2-9b-it',
+                'llama-3.1-8b': 'meta-llama/Llama-3.1-8B',
+                'llama-3.1-8b-instruct': 'meta-llama/Llama-3.1-8B-Instruct'
+            };
+            return repoMap[modelName] || modelName;
+        }
+
+        async function loadModel(modelName) {
+            if (!confirm('Load model ' + modelName + '?\n\nThis will make the model ready for use and may take a moment.')) {
+                return;
+            }
+
+            // Disable button and show loading
+            const button = event.target;
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(API_BASE + '/models/load', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model: modelName })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+
+                    if (result.message && result.message.includes('successfully')) {
+                        alert('✅ ' + modelName + ' loaded successfully!\n\nYou can now use it for chat completions.');
+                        loadModels();
+                    } else {
+                        alert('⚠️ Model load response: ' + result.message);
+                        loadModels();
+                    }
+                } else {
+                    const errorData = await response.json();
+                    alert('❌ Failed to load ' + modelName + ':\n' + (errorData.detail || errorData.message || 'Unknown error'));
+
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            } catch (error) {
+                alert('❌ Error loading model: ' + error.message);
+
+                button.disabled = false;
+                button.textContent = originalText;
+            }
+        }
+
+        async function unloadModel(modelName) {
+            if (!confirm('Unload model ' + modelName + '?\n\nThis will free up memory but the model will remain on disk.')) {
+                try {
+                    const response = await fetch(API_BASE + '/models/unload', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ model: modelName })
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result.message && result.message.includes('successfully')) {
+                            alert('✅ ' + modelName + ' unloaded successfully');
+                            loadModels();
+                        } else {
+                            alert('⚠️ Model unload: ' + result.message);
+                            loadModels();
+                        }
+                    } else {
+                        const errorData = await response.json();
+                        alert('❌ Failed to unload ' + modelName + ': ' + (errorData.detail || errorData.message || 'Unknown error'));
+                    }
+                } catch (error) {
+                    alert('❌ Error unloading model: ' + error.message);
+                }
+            }
+        }
+
+        async function removeModel(modelName) {
+            if (!confirm('Remove ' + modelName + ' from disk?\n\n⚠️ This will permanently delete all downloaded files for this model and cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(API_BASE + '/models/' + encodeURIComponent(modelName), {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    showSuccess('✅ ' + result.message);
+                    // Wait a moment for the filesystem to update, then refresh
+                    setTimeout(loadModels, 500);
+                } else {
+                    const errorData = await response.json();
+                    showError('❌ Failed to remove ' + modelName + ':\n' + (errorData.detail || errorData.message || 'Unknown error'));
+                }
+            } catch (error) {
+                showError('❌ Error removing model: ' + error.message);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('addModelModal').style.display = 'none';
+        }
+
+        async function searchModels() {
+            const query = document.getElementById('searchInput').value;
+            if (!query) return;
+
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = '<div class="loading">🔍 Searching Hugging Face...</div>';
+
+            try {
+                const response = await fetch('/api/search/huggingface?query=' + encodeURIComponent(query) + '&limit=10');
+                const data = await response.json();
+
+                if (data.success && data.models.length > 0) {
+                    resultsDiv.innerHTML = data.models.map(model => `
+                        <div class="search-result-item" onclick="showAddModelDialog('${model.id}')">
+                            <div class="search-result-title">${model.id}</div>
+                            <div class="search-result-meta">
+                                ${model.author ? 'by ' + model.author + ' | ' : ''}
+                                Downloads: ${model.downloads.toLocaleString()} |
+                                Likes: ${model.likes.toLocaleString()}
+                                ${model.pipeline_tag ? ' | ' + model.pipeline_tag : ''}
+                            </div>
+                            ${model.description ? '<div class="search-result-desc">' + model.description.substring(0, 150) + '...</div>' : ''}
+                        </div>
+                    `).join('');
+                } else {
+                    resultsDiv.innerHTML = '<div class="loading">No models found for "' + query + '". Try different keywords.</div>';
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                resultsDiv.innerHTML = '<div class="loading">Search failed: ' + error.message + '</div>';
+            }
+        }
+
+        function showAddModelDialog(modelId) {
+            const modal = document.getElementById('addModelModal');
+            const modalBody = document.getElementById('modalBody');
+
+            // Extract a meaningful local name from the model ID
+            const localName = extractLocalName(modelId);
+
+            modalBody.innerHTML = `
+                <p><strong>Model:</strong> ${modelId}</p>
+                <p><strong>Local Name:</strong> <input type="text" id="localName" value="${localName}" placeholder="Enter a name for local reference" style="width: 100%; padding: 8px; margin: 10px 0;"></p>
+                <p><strong>Type:</strong> <select id="modelType" style="padding: 8px;">
+                    <option value="safetensors">Safetensors</option>
+                    <option value="gguf">GGUF</option>
+                    <option value="pytorch">PyTorch</option>
+                </select></p>
+                <p><strong>Files:</strong> <input type="text" id="modelFiles" placeholder="e.g., model.safetensors, config.json (comma-separated)" style="width: 100%; padding: 8px; margin: 10px 0;"></p>
+                <div style="margin-top: 20px;">
+                    <button class="btn-primary" onclick="addModelToRegistry('${modelId}')">Add to Registry</button>
+                    <button onclick="closeModal()" style="margin-left: 10px;">Cancel</button>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function extractLocalName(modelId) {
+            // Extract a clean, lowercase name from the model ID
+            const parts = modelId.split('/');
+            const modelPart = parts[parts.length - 1]; // Get the last part after /
+
+            // Convert to lowercase and replace common patterns
+            let localName = modelPart
+                .toLowerCase()
+                .replace(/[^a-z0-9-]/g, '-') // Replace non-alphanumeric with hyphens
+                .replace(/-+/g, '-') // Replace multiple hyphens with single
+                .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
+            // Common name mappings
+            const nameMappings = {
+                'deepseek-r1-distill-qwen-32b': 'deepseek-r1-32b',
+                'deepseek-r1-distill-qwen-1-5b': 'deepseek-r1-1.5b',
+                'deepseek-ocr': 'deepseek-ocr',
+                'phi-3-mini-4k-instruct': 'phi-3-mini',
+                'phi-3-small-8k-instruct': 'phi-3-small',
+                'phi-3-medium-14b-instruct': 'phi-3-medium',
+                'llama-2-7b-chat-hf': 'llama-2-7b-chat',
+                'llama-2-13b-chat-hf': 'llama-2-13b-chat',
+                'mistral-7b-instruct-v0-3': 'mistral-7b-instruct',
+                'code-llama-7b-instruct-hf': 'codellama-7b-instruct',
+                'tinyllama-1-1b-chat-v1-0': 'tinyllama-1.1b-chat'
+            };
+
+            return nameMappings[localName] || localName;
+        }
+
+        function addModelToRegistry(modelId) {
+            const localName = document.getElementById('localName').value || extractLocalName(modelId);
+            const modelType = document.getElementById('modelType').value;
+            const modelFiles = document.getElementById('modelFiles').value || '';
+
+            // Validation
+            if (!localName) {
+                alert('Please enter a local name for the model.');
+                return;
+            }
+
+            // Build the YAML entry for the model
+            const yamlEntry = `  ${localName}:
+    repo_id: "${modelId}"
+    files: [
+      ${modelFiles ? modelFiles.split(',').map(f => '"' + f.trim() + '"').join(',\n      ') : '"model.safetensors", "config.json", "tokenizer.json"'}
+    ]
+    type: "${modelType}"
+    description: "Model added from Hugging Face: ${modelId}"`;
+
+            alert('✅ Model Configuration:\n\n' + yamlEntry + '\n\n' +
+                  'To add this model to your LocalLLM registry:\n\n' +
+                  '1. Add the above to your models.yaml file\n' +
+                  '2. Run: python update_model_registry.py\n' +
+                  '3. Restart the LocalLLM server\n\n' +
+                  'Note: You may need to specify the correct files for this model.');
+
+            // Optionally copy to clipboard
+            navigator.clipboard.writeText(yamlEntry);
+            setTimeout(() => alert('Configuration copied to clipboard!'), 100);
+
+            closeModal();
+        }
+
+        async function loadSystemInfo() {
+            const infoDiv = document.getElementById('systemInfo');
+
+            try {
+                // Get models info for health status
+                const modelsResponse = await fetch(API_BASE + '/models/status');
+                const modelsData = await modelsResponse.json();
+
+                // Get Ollama info
+                const ollamaResponse = await fetch('http://localhost:11434/api/tags');
+                const ollamaData = await ollamaResponse.json();
+
+                infoDiv.innerHTML = `
+                    <div class="info-item">
+                        <div class="info-label">Server Status</div>
+                        <div class="info-value">✅ Healthy</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Models Loaded</div>
+                        <div class="info-value">${modelsData.loaded ? modelsData.loaded.length : 0}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Ollama Models</div>
+                        <div class="info-value">${ollamaData.models?.length || 0} models</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Server Uptime</div>
+                        <div class="info-value">${new Date().toLocaleString()}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">API Endpoints</div>
+                        <div class="info-value">
+                            <a href="${API_BASE}/v1/models" target="_blank" style="color: #667eea;">Models API</a><br>
+                            <a href="${API_BASE}/health" target="_blank" style="color: #667eea;">Health Check</a>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                infoDiv.innerHTML = '<div class="loading">Failed to load system information</div>';
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchModels();
+            }
+        });
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('addModelModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Hugging Face Token Management
+        async function saveHfToken() {
+            const token = document.getElementById('hfToken').value.trim();
+
+            if (!token) {
+                alert('Please enter a valid token');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/settings/hf_token', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: token })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('✅ ' + result.message);
+                    // Clear the input field for security
+                    document.getElementById('hfToken').value = '';
+                    // Show current token status
+                    loadHfTokenStatus();
+                } else {
+                    alert('❌ Failed to save token: ' + result.message);
+                }
+            } catch (error) {
+                alert('❌ Error saving token: ' + error.message);
+            }
+        }
+
+        async function loadHfTokenStatus() {
+            try {
+                const response = await fetch('/api/settings/hf_token');
+                const result = await response.json();
+
+                if (result.success) {
+                    if (result.has_token) {
+                        // Update UI to show token exists
+                        const tokenInput = document.getElementById('hfToken');
+                        tokenInput.placeholder = 'Token is set (click to update)';
+                        // You could show the masked token here if needed
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load token status:', error);
+            }
+        }
+
+        // Load token status on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadHfTokenStatus();
+        });
+
+        // Notification System
+        function showNotification(message, type = 'info', duration = 0) {
+            const notificationArea = document.getElementById('notificationArea');
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+
+            // Set message and type
+            notificationText.textContent = message;
+            notification.className = 'notification ' + type;
+
+            // Show notification
+            notificationArea.style.display = 'block';
+
+            // Auto-hide after duration (if specified)
+            if (duration > 0) {
+                setTimeout(() => {
+                    hideNotification();
+                }, duration);
+            }
+        }
+
+        function hideNotification() {
+            const notificationArea = document.getElementById('notificationArea');
+            notificationArea.style.display = 'none';
+        }
+
+        // Helper functions to replace alert()
+        function showError(message) {
+            showNotification(message, 'error');
+        }
+
+        function showSuccess(message) {
+            showNotification(message, 'success', 5000); // Auto-hide success after 5 seconds
+        }
+
+        function showInfo(message) {
+            showNotification(message, 'info', 5000); // Auto-hide info after 5 seconds
+        }
+    </script>
+</body>
+</html>

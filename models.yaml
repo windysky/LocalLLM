@@ -1,0 +1,117 @@
+# Model Registry for LocalLLM
+# Add new models here without editing code
+
+models:
+  # Google Models
+  gemma-2-9b:
+    repo_id: "google/gemma-2-9b-it"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Google Gemma 2 - 9B parameters"
+
+  gemma-2-9b-it:
+    repo_id: "google/gemma-2-9b-it"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Google Gemma 2 Instruct - 9B parameters"
+
+  # Qwen Models (multi-part models)
+  qwen2.5-7b:
+    repo_id: "Qwen/Qwen2.5-7B-Instruct"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Alibaba Qwen 2.5 - 7B parameters"
+
+  qwen2.5-7b-instruct:
+    repo_id: "Qwen/Qwen2.5-7B-Instruct"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Alibaba Qwen 2.5 Instruct - 7B parameters"
+
+  # Meta Models (Note: Requires Hugging Face access request)
+  llama-3.1-8b:
+    repo_id: "meta-llama/Llama-3.1-8B"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Meta Llama 3.1 - 8B parameters (requires HF access)"
+
+  llama-3.1-8b-instruct:
+    repo_id: "meta-llama/Llama-3.1-8B-Instruct"
+    files:
+      - "model-00001-of-00004.safetensors"
+      - "model-00002-of-00004.safetensors"
+      - "model-00003-of-00004.safetensors"
+      - "model-00004-of-00004.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+    type: "safetensors"
+    description: "Meta Llama 3.1 Instruct - 8B parameters (requires HF access)"
+
+  # Mistral Models (multi-part)
+  mistral-7b:
+    repo_id: "mistralai/Mistral-7B-Instruct-v0.3"
+    files:
+      - "model-00001-of-00003.safetensors"
+      - "model-00002-of-00003.safetensors"
+      - "model-00003-of-00003.safetensors"
+      - "model.safetensors.index.json"
+      - "config.json"
+      - "tokenizer.json"
+      - "tokenizer_config.json"
+    type: "safetensors"
+    description: "Mistral 7B Instruct - 7B parameters"
+
+  # More accessible models
+  phi-3-mini:
+    repo_id: "microsoft/Phi-3-mini-4k-instruct-gguf"
+    files:
+      - "Phi-3-mini-4k-instruct-q4.gguf"
+    type: "gguf"
+    description: "Microsoft Phi-3 Mini - 3.8B parameters (GGUF format)"
+
+  # ADD NEW MODELS BELOW
+  # Example:
+  # phi-3-mini:
+  #   repo_id: "microsoft/Phi-3-mini-4k-instruct"
+  #   files:
+  #     - "model.safetensors"
+  #     - "config.json"
+  #     - "tokenizer.json"
+  #   type: "safetensors"
+  #   description: "Microsoft Phi-3 Mini - 3.8B parameters"

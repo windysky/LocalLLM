@@ -1,0 +1,70 @@
+# LocalLLM Configuration
+
+# Server settings
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 1
+
+# Model settings
+models:
+  # Default directory to store downloaded models
+  storage_dir: "./models"
+
+  # Default model to load on startup (empty = no model loaded)
+  default_model: ""
+
+  # Maximum number of models to keep loaded simultaneously
+  max_loaded_models: 1
+
+  # Auto-download models when requested
+  auto_download: true
+
+  # Supported model formats
+  supported_formats:
+    - "gguf"
+    - "safetensors"
+    - "pytorch"
+
+# Inference settings
+inference:
+  # Device: auto, cpu, cuda, mps
+  device: "auto"
+
+  # Maximum memory usage (in GB)
+  max_memory: 8
+
+  # Context window size
+  context_size: 2048
+
+  # Temperature for generation (0.0 to 2.0)
+  temperature: 0.7
+
+  # Maximum tokens to generate
+  max_tokens: 1024
+
+# Web interface settings
+web:
+  enabled: true
+  port: 8080
+  host: "0.0.0.0"
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/locallm.log"
+  max_size: "10MB"
+  backup_count: 5
+
+# API settings
+api:
+  # Enable OpenAI-compatible endpoints
+  openai_compatible: true
+
+  # Rate limiting (requests per minute)
+  rate_limit: 60
+
+  # CORS settings
+  cors_enabled: true
+  cors_origins:
+    - "*"

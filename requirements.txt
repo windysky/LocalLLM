@@ -1,0 +1,46 @@
+# Core dependencies
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+pydantic>=2.0.0,<2.5.0
+python-multipart>=0.0.6
+
+# Model serving
+ollama>=0.1.0
+transformers>=4.30.0
+accelerate>=0.20.0
+safetensors>=0.3.0
+huggingface-hub>=0.15.0
+
+# Model downloading
+requests>=2.30.0
+tqdm>=4.60.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Web interface
+jinja2>=3.1.0
+aiofiles>=22.0.0
+
+# CLI tools
+click>=8.0.0
+rich>=13.0.0
+
+# Logging (if needed)
+psutil>=5.9.0
+
+# Development
+pytest>=7.0.0
+pytest-asyncio>=0.20.0
+pytest-cov>=4.0.0
+httpx>=0.24.0
+
+# Optional formatting/linting (install as needed)
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.0.0
+
+# Optional GPU support (uncomment if you have CUDA)
+# torch>=2.0.0
+# bitsandbytes>=0.40.0
