@@ -32,6 +32,35 @@ logger = logging.getLogger(__name__)
 
 # Global model manager
 model_manager = None
+PREFERRED_DEFAULTS = ["gemma-2-9b", "mistral-7b"]
+
+
+def select_default_model(manager: ModelManager) -> str:
+    """
+    Select a default model:
+    1) Use config.models.default_model if it is already downloaded.
+    2) Otherwise prefer downloaded gemma-2-9b then mistral-7b.
+    3) If config.models.default_model is set (even if not downloaded), use it next.
+    4) Otherwise pick first available in registry.
+    """
+    downloaded = manager.downloaded_models.keys()
+
+    if config.models.default_model and config.models.default_model in downloaded:
+        return config.models.default_model
+
+    for candidate in PREFERRED_DEFAULTS:
+        if candidate in downloaded:
+            return candidate
+
+    if config.models.default_model:
+        return config.models.default_model
+
+    available = manager.downloader.list_available_models()
+    for candidate in PREFERRED_DEFAULTS:
+        if candidate in available:
+            return candidate
+
+    return available[0] if available else ""
 
 
 @asynccontextmanager
@@ -43,16 +72,22 @@ async def lifespan(app: FastAPI):
     # Initialize model manager
     model_manager = ModelManager()
 
-    # Load default model if specified
-    if config.models.default_model:
-        logger.info(f"Loading default model: {config.models.default_model}")
-        if model_manager.download_model(config.models.default_model):
-            if model_manager.load_model(config.models.default_model):
-                logger.info("Default model loaded successfully")
-            else:
-                logger.warning("Failed to load default model")
+    # Load default model if specified or autodetected
+    chosen_model = select_default_model(model_manager)
+    if chosen_model:
+        logger.info(f"Selected default model: {chosen_model}")
+        if chosen_model in model_manager.downloaded_models or config.models.auto_download:
+            if chosen_model not in model_manager.downloaded_models and config.models.auto_download:
+                logger.info(f"Default model {chosen_model} not downloaded; attempting download...")
+                if not model_manager.download_model(chosen_model):
+                    logger.warning(f"Failed to download default model {chosen_model}")
+            if chosen_model in model_manager.downloaded_models or config.models.auto_download:
+                if model_manager.load_model(chosen_model):
+                    logger.info("Default model loaded successfully")
+                else:
+                    logger.warning("Failed to load default model")
         else:
-            logger.warning("Failed to download default model")
+            logger.info(f"Default model {chosen_model} not downloaded; skipping load (auto_download disabled)")
 
     logger.info("LocalLLM server started successfully")
     yield
@@ -403,6 +438,16 @@ async def get_download_progress(model_name: str):
     try:
         # Get progress from downloader
         progress = model_manager.downloader.get_download_progress(model_name)
+
+        # If not found, check for format-suffixed versions
+        if progress["status"] == "not_started":
+            for suffix in ["-gguf", "-safetensors", "-pytorch"]:
+                suffixed_name = f"{model_name}{suffix}"
+                alt_progress = model_manager.downloader.get_download_progress(suffixed_name)
+                if alt_progress["status"] != "not_started":
+                    progress = alt_progress
+                    break
+
         logger.info(f"Progress endpoint called for {model_name}, returning: {progress}")
         return JSONResponse(content=progress)
     except Exception as e:
@@ -428,8 +473,9 @@ async def download_model(request: DownloadModelRequest):
     if request.model in model_manager.downloaded_models:
         return {"message": f"Model {request.model} already downloaded"}
 
-    # Download the model
-    if model_manager.download_model(request.model):
+    # Download the model with specified type
+    download_type = request.type or "safetensors"
+    if model_manager.download_model(request.model, download_type):
         return {"message": f"Model {request.model} downloaded successfully"}
     else:
         raise HTTPException(

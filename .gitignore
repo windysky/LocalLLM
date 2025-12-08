@@ -4,3 +4,9 @@
 # Ignore local models directory and its contents
 models/
 models/*
+
+# Runtime artifacts
+__pycache__/
+.pytest_cache/
+logs/
+*.pid

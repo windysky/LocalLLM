@@ -65,7 +65,10 @@ def main():
     parser.add_argument("--workers", type=int, default=config.server.workers, help="Number of workers")
     parser.add_argument("--model", default=config.models.default_model, help="Default model to load")
     parser.add_argument("--dev", action="store_true", help="Run in development mode")
-    parser.add_argument("--no-auto-download", action="store_true", help="Disable automatic model downloading")
+    auto_group = parser.add_mutually_exclusive_group()
+    auto_group.add_argument("--auto-download", dest="auto_download", action="store_true", help="Enable automatic model downloading")
+    auto_group.add_argument("--no-auto-download", dest="auto_download", action="store_false", help="Disable automatic model downloading")
+    parser.set_defaults(auto_download=None)
 
     args = parser.parse_args()
 
@@ -87,8 +90,9 @@ def main():
     config.server.host = args.host
     config.server.port = args.port
     config.server.workers = 1 if args.dev else args.workers
-    config.models.default_model = args.model or ""
-    config.models.auto_download = not args.no_auto_download
+    config.models.default_model = args.model or config.models.default_model
+    if args.auto_download is not None:
+        config.models.auto_download = args.auto_download
 
     # Print startup message
     rprint("[green]Starting LocalLLM server...[/green]")

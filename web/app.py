@@ -13,20 +13,19 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import JSONResponse
 import uvicorn
 
-# Hugging Face search functionality
+# Hugging Face search functionality and API proxy
 import requests
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.config import config
-from src.model_manager import ModelManager
 
 # Initialize FastAPI app
 app = FastAPI(title="LocalLLM Web Interface")
 
-# Initialize model manager
-model_manager = ModelManager()
+# Target API base for the running LLM service
+API_BASE = f"http://{config.server.host}:{config.server.port}"
 
 # Setup templates
 templates_dir = Path(__file__).parent
@@ -34,8 +33,8 @@ templates = Jinja2Templates(directory=str(templates_dir))
 
 # Mount static files (if any)
 static_dir = templates_dir / "static"
-if static_dir.exists():
-    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+print(f"DEBUG: Mounting static dir at {static_dir.absolute()}")
+app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
 # Hugging Face search endpoint
 @app.get("/api/search/huggingface")
@@ -118,9 +117,16 @@ async def home(request: Request):
 @app.get("/simple")
 async def simple_interface(request: Request):
     """Simple interface page."""
-    # Get model status
-    available_models = model_manager.list_available_models()
-    loaded_models = model_manager.get_loaded_models()
+    # Get model status from API
+    available_models, loaded_models = [], []
+    try:
+        resp = requests.get(f"{API_BASE}/models/status", timeout=5)
+        if resp.ok:
+            payload = resp.json()
+            available_models = payload.get("available", [])
+            loaded_models = payload.get("loaded", [])
+    except Exception:
+        pass
 
     return templates.TemplateResponse(
         "index.html",
@@ -128,7 +134,7 @@ async def simple_interface(request: Request):
             "request": request,
             "available_models": available_models,
             "loaded_models": loaded_models,
-            "api_base": f"http://{config.server.host}:{config.server.port}"
+            "api_base": API_BASE
         }
     )
 
@@ -136,40 +142,80 @@ async def simple_interface(request: Request):
 @app.get("/api/models")
 async def api_models():
     """API endpoint for models."""
-    return {
-        "available": model_manager.list_available_models(),
-        "loaded": model_manager.get_loaded_models()
-    }
+    try:
+        resp = requests.get(f"{API_BASE}/models/status", timeout=10)
+        resp.raise_for_status()
+        data = resp.json()
+        return {"success": True, **data}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 @app.post("/api/models/{model_name}/download")
-async def api_download_model(model_name: str):
+async def api_download_model(model_name: str, request: Request):
     """API endpoint to download a model."""
-    success = model_manager.download_model(model_name)
-    if success:
-        return {"success": True, "message": f"Model {model_name} download started"}
-    else:
-        return {"success": False, "message": f"Failed to download model {model_name}"}
+    try:
+        # Get the request body to extract the format type
+        data = await request.json()
+        download_type = data.get("type", "safetensors")  # Default to safetensors
+
+        resp = requests.post(
+            f"{API_BASE}/models/download",
+            json={"model": model_name, "type": download_type},
+            timeout=300  # 5 minutes for download
+        )
+        if resp.ok:
+            return {"success": True, "message": resp.json().get("message", "")}
+        return {"success": False, "message": resp.text}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 @app.post("/api/models/{model_name}/load")
 async def api_load_model(model_name: str):
     """API endpoint to load a model."""
-    success = model_manager.load_model(model_name)
-    if success:
-        return {"success": True, "message": f"Model {model_name} loaded successfully"}
-    else:
-        return {"success": False, "message": f"Failed to load model {model_name}"}
+    try:
+        resp = requests.post(
+            f"{API_BASE}/models/load",
+            json={"model": model_name},
+            timeout=300  # 5 minutes for model loading
+        )
+        if resp.ok:
+            return {"success": True, "message": resp.json().get("message", "")}
+        return {"success": False, "message": resp.text}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 @app.post("/api/models/{model_name}/unload")
 async def api_unload_model(model_name: str):
     """API endpoint to unload a model."""
-    success = model_manager.unload_model(model_name)
-    if success:
-        return {"success": True, "message": f"Model {model_name} unloaded successfully"}
-    else:
-        return {"success": False, "message": f"Failed to unload model {model_name}"}
+    try:
+        resp = requests.post(
+            f"{API_BASE}/models/unload",
+            json={"model": model_name},
+            timeout=300  # 5 minutes for model unloading
+        )
+        if resp.ok:
+            return {"success": True, "message": resp.json().get("message", "")}
+        return {"success": False, "message": resp.text}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
+
+
+@app.delete("/api/models/{model_name}")
+async def api_remove_model(model_name: str):
+    """API endpoint to remove a model."""
+    try:
+        resp = requests.delete(
+            f"{API_BASE}/models/{model_name}",
+            timeout=30
+        )
+        if resp.ok:
+            return {"success": True, "message": resp.json().get("message", "")}
+        return {"success": False, "message": resp.text}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 
 @app.post("/api/settings/hf_token")

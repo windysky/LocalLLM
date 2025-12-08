@@ -20,6 +20,14 @@ if [ -f locallm_web.pid ]; then
     rm -f locallm_web.pid
 fi
 
+# Stop Ollama only if we started it
+if [ -f locallm_ollama.pid ]; then
+    OLLAMA_PID=$(cat locallm_ollama.pid)
+    echo "Stopping Ollama daemon started by this script (PID: $OLLAMA_PID)..."
+    kill $OLLAMA_PID 2>/dev/null
+    rm -f locallm_ollama.pid
+fi
+
 # Only stop processes with exact path matches to avoid affecting other apps
 echo "Cleaning up LocalLLM processes..."
 
@@ -30,15 +38,29 @@ pkill -f "/home/juhur/PROJECTS/LocalLLM/cli/start_server.py" 2>/dev/null
 pkill -f "/home/juhur/PROJECTS/LocalLLM/web/app.py" 2>/dev/null
 
 # Check if port 8000 is still in use by LocalLLM
-if lsof -ti:8000 | xargs ps -p | grep -q "cli/start_server.py" 2>/dev/null; then
-    echo "Force stopping LocalLLM on port 8000..."
-    lsof -ti:8000 | xargs kill -9 2>/dev/null
+API_PORT_PIDS=$(lsof -ti:8000 2>/dev/null | tr '\n' ' ')
+if [ -n "$API_PORT_PIDS" ]; then
+    if echo "$API_PORT_PIDS" | xargs -r ps -p 2>/dev/null | grep -q "cli/start_server.py"; then
+        echo "Force stopping LocalLLM on port 8000..."
+        echo "$API_PORT_PIDS" | xargs -r kill -9 2>/dev/null
+    fi
 fi
 
 # Check if port 8080 is still in use by LocalLLM
-if lsof -ti:8080 | xargs ps -p | grep -q "web/app.py" 2>/dev/null; then
-    echo "Force stopping LocalLLM on port 8080..."
-    lsof -ti:8080 | xargs kill -9 2>/dev/null
+WEB_PORT_PIDS=$(lsof -ti:8080 2>/dev/null | tr '\n' ' ')
+if [ -n "$WEB_PORT_PIDS" ]; then
+    if echo "$WEB_PORT_PIDS" | xargs -r ps -p 2>/dev/null | grep -q "web/app.py"; then
+        echo "Force stopping LocalLLM on port 8080..."
+        echo "$WEB_PORT_PIDS" | xargs -r kill -9 2>/dev/null
+    fi
+fi
+
+# Optionally stop Ollama on its default port if we started it (best-effort, guarded above)
+if [ -f locallm_ollama.pid ]; then
+    OLLAMA_PORT_PIDS=$(lsof -ti:11434 2>/dev/null | tr '\n' ' ')
+    if [ -n "$OLLAMA_PORT_PIDS" ]; then
+        echo "$OLLAMA_PORT_PIDS" | xargs -r kill -9 2>/dev/null
+    fi
 fi
 
 echo "✅ LocalLLM services stopped!"

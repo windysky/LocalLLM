@@ -96,6 +96,7 @@ class UnloadModelRequest(BaseModel):
 class DownloadModelRequest(BaseModel):
     """Download model request model."""
     model: str = Field(..., description="Model name to download")
+    type: Optional[str] = Field("safetensors", description="Model format: safetensors, gguf, or pytorch")
 
 
 class ErrorResponse(BaseModel):

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Models Loading</title>
+</head>
+<body>
+    <div id="modelGrid">
+        <div class="loading">Loading models...</div>
+    </div>
+
+    <script>
+        async function testLoadModels() {
+            console.log('Testing models load...');
+            try {
+                const response = await fetch('/api/models');
+                console.log('Response status:', response.status);
+                const data = await response.json();
+                console.log('Received data:', data);
+
+                const available = data.available || [];
+                console.log('Available models:', available);
+                console.log('Model count:', available.length);
+
+                document.getElementById('modelGrid').innerHTML = `
+                    <div>Found ${available.length} models</div>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('modelGrid').innerHTML = `
+                    <div>Error: ${error.message}</div>
+                `;
+            }
+        }
+
+        testLoadModels();
+    </script>
+</body>
+</html>

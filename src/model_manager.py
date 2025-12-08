@@ -21,6 +21,58 @@ class ModelManager:
         self.ollama_models: Dict[str, str] = {}  # Map model name to Ollama model ID
         self.max_models = config.models.max_loaded_models
 
+    def _resolve_base_model(self, model_name: str) -> str:
+        """Resolve the Ollama base name for a model."""
+        model_config = self.downloader.MODEL_REGISTRY.get(model_name, {})
+        return model_config.get("ollama_base", "llama3.1")
+
+    def _ollama_model_exists(self, ollama_model_name: str) -> bool:
+        """Check if an Ollama model already exists."""
+        try:
+            result = subprocess.run(
+                ["ollama", "list"],
+                capture_output=True,
+                text=True,
+                timeout=30
+            )
+            if result.returncode != 0:
+                return False
+            lines = result.stdout.strip().split("\n")
+            for line in lines[1:]:  # skip header
+                if line.strip() and ollama_model_name in line:
+                    return True
+            return False
+        except Exception as e:
+            logger.error(f"Failed to check Ollama model existence: {e}")
+            return False
+
+    def _build_modelfile(self, model_name: str, model_path: Path) -> Path:
+        """
+        Build a Modelfile referencing either a local GGUF file (preferred) or a base model.
+        Returns the path to the Modelfile.
+        """
+        model_config = self.downloader.MODEL_REGISTRY.get(model_name, {})
+        base_model = self._resolve_base_model(model_name)
+
+        gguf_files = list(model_path.glob("*.gguf"))
+        from_line = None
+        # Prefer local GGUF file if it exists, regardless of registry type
+        if gguf_files:
+            from_line = gguf_files[0].resolve()  # Use absolute path
+            logger.info(f"Using local GGUF file: {from_line}")
+        else:
+            from_line = base_model
+            logger.info(f"Using base model: {base_model}")
+
+        modelfile_path = model_path / "Modelfile"
+        with open(modelfile_path, "w") as f:
+            f.write(f"FROM {from_line}\n")
+            f.write(f"PARAMETER temperature {config.inference.temperature}\n")
+            f.write(f"PARAMETER num_ctx {config.inference.context_size}\n")
+            f.write(f"PARAMETER num_predict {config.inference.max_tokens}\n")
+
+        return modelfile_path
+
     def _ensure_ollama(self):
         """Ensure Ollama is installed and running."""
         try:
@@ -59,7 +111,7 @@ class ModelManager:
 
         # List downloaded models
         for model_info in self.downloader.list_downloaded_models():
-            model_info["status"] = "downloaded"
+            # Preserve status (downloaded vs incomplete)
             models.append(model_info)
 
         # List models in registry but not downloaded
@@ -73,19 +125,22 @@ class ModelManager:
 
         return models
 
-    def download_model(self, model_name: str) -> bool:
+    def download_model(self, model_name: str, format_type: str = "safetensors") -> bool:
         """Download a model if not already present."""
         if model_name not in self.downloader.MODEL_REGISTRY:
             logger.error(f"Unknown model: {model_name}")
             return False
 
-        return self.downloader.download_model(model_name)
+        return self.downloader.download_model(model_name, format_type)
 
     def load_model(self, model_name: str) -> bool:
         """Load a model for inference using Ollama."""
         if model_name not in self.downloaded_models:
-            logger.error(f"Model {model_name} not downloaded")
-            return False
+            logger.warning(f"Model {model_name} not downloaded locally")
+            # Allow creation via base model if available in Ollama
+            model_path = self.downloader.storage_dir / model_name
+        else:
+            model_path = self.downloader.get_model_path(model_name)
 
         if model_name in self.loaded_models:
             logger.info(f"Model {model_name} already loaded")
@@ -101,52 +156,13 @@ class ModelManager:
             return False
 
         try:
-            model_path = self.downloader.get_model_path(model_name)
             ollama_model_name = f"locallm-{model_name}"
 
-            # Check if model already exists in Ollama
-            result = subprocess.run(
-                ["ollama", "list"],
-                capture_output=True,
-                text=True,
-                timeout=30
-            )
-
-            model_exists = False
-            if result.returncode == 0:
-                # Parse the output to check if model exists
-                lines = result.stdout.strip().split('\n')[1:]  # Skip header
-                for line in lines:
-                    if line.strip() and ollama_model_name in line:
-                        model_exists = True
-                        break
-
             # Create or pull the model in Ollama
-            if not model_exists:
-                logger.info(f"Creating Ollama model {ollama_model_name} from {model_path}")
+            if not self._ollama_model_exists(ollama_model_name):
+                logger.info(f"Creating Ollama model {ollama_model_name} using Modelfile")
+                modelfile_path = self._build_modelfile(model_name, model_path)
 
-                # Create Modelfile
-                modelfile_path = model_path / "Modelfile"
-                with open(modelfile_path, "w") as f:
-                    # Determine the base model for Ollama
-                    if "gemma" in model_name.lower():
-                        base_model = "gemma2"
-                    elif "qwen" in model_name.lower():
-                        base_model = "qwen2.5"
-                    elif "llama" in model_name.lower():
-                        base_model = "llama3.1"
-                    elif "mistral" in model_name.lower():
-                        base_model = "mistral"
-                    else:
-                        base_model = "llama3.1"  # Default fallback
-
-                    f.write(f"FROM {base_model}\n")
-                    # Add model-specific parameters
-                    f.write(f"PARAMETER temperature {config.inference.temperature}\n")
-                    f.write(f"PARAMETER num_ctx {config.inference.context_size}\n")
-                    f.write(f"PARAMETER num_predict {config.inference.max_tokens}\n")
-
-                # Create model using Modelfile
                 result = subprocess.run(
                     ["ollama", "create", ollama_model_name, "-f", str(modelfile_path)],
                     capture_output=True,
@@ -220,8 +236,8 @@ class ModelManager:
         try:
             ollama_model_name = self.loaded_models[model_name]["ollama_name"]
 
-            # Build command
-            cmd = ["ollama", "run", ollama_model_name, prompt]
+            # Build command (ollama expects flags after the model name)
+            cmd = ["ollama", "run", ollama_model_name]
 
             # Add parameters if provided
             params = []
@@ -232,8 +248,7 @@ class ModelManager:
             if "context_size" in kwargs:
                 params.extend(["--num-ctx", str(kwargs["context_size"])])
 
-            if params:
-                cmd = ["ollama", "run"] + params + [ollama_model_name, prompt]
+            cmd = ["ollama", "run", ollama_model_name] + params + [prompt]
 
             # Run inference
             result = subprocess.run(

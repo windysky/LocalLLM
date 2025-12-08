@@ -341,3 +341,583 @@ Access to model meta-llama/Llama-3.1-8B is restricted and you are not in the aut
 2025-12-07 15:36:58,460 - src.server - INFO - Progress endpoint called for gemma-2-9b, returning: {'status': 'completed', 'progress': 100, 'message': 'Download completed successfully'}
 2025-12-07 15:39:07,825 - src.server - INFO - Shutting down LocalLLM server...
 2025-12-07 15:39:07,825 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 19:32:14,303 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 19:32:14,303 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 19:32:34,167 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b from models/gemma-2-9b
+2025-12-07 19:33:18,160 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 20:37:04,025 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 20:37:04,086 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 20:37:04,086 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 20:37:07,678 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 20:37:07,679 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 20:37:07,712 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 20:37:14,238 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 20:37:14,241 - src.server - INFO - Default model loaded successfully
+2025-12-07 20:37:14,241 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 20:52:47,826 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 20:52:48,376 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 20:53:12,022 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 20:53:12,057 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 20:54:02,384 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 20:54:02,385 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 20:54:05,637 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 20:54:05,637 - src.server - INFO - Default model loaded successfully
+2025-12-07 20:54:05,637 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 21:00:01,291 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:00:02,376 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:00:11,366 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:00:11,402 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:01:39,683 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:01:40,211 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:05:36,068 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:05:37,005 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:07:51,372 - src.server - INFO - Model gemma-2-9b-it not loaded, attempting to download and load...
+2025-12-07 21:07:51,376 - src.downloader - INFO - Downloading model gemma-2-9b-it from google/gemma-2-9b-it
+2025-12-07 21:07:51,376 - src.downloader - INFO - Initializing download progress for gemma-2-9b-it
+2025-12-07 21:07:51,376 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Starting download...
+2025-12-07 21:07:51,376 - src.downloader - INFO - Total files to download for gemma-2-9b-it: 7
+2025-12-07 21:07:51,376 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Downloading model-00001-of-00004.safetensors...
+2025-12-07 21:07:51,376 - src.downloader - INFO - Progress before downloading model-00001-of-00004.safetensors: 0%
+2025-12-07 21:07:51,376 - src.downloader - INFO - Downloading model-00001-of-00004.safetensors...
+2025-12-07 21:08:10,012 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Completed model-00001-of-00004.safetensors
+2025-12-07 21:08:10,012 - src.downloader - INFO - Progress after downloading model-00001-of-00004.safetensors: 14%
+2025-12-07 21:08:10,012 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Downloading model-00002-of-00004.safetensors...
+2025-12-07 21:08:10,012 - src.downloader - INFO - Progress before downloading model-00002-of-00004.safetensors: 14%
+2025-12-07 21:08:10,012 - src.downloader - INFO - Downloading model-00002-of-00004.safetensors...
+2025-12-07 21:08:27,691 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Completed model-00002-of-00004.safetensors
+2025-12-07 21:08:27,691 - src.downloader - INFO - Progress after downloading model-00002-of-00004.safetensors: 28%
+2025-12-07 21:08:27,691 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Downloading model-00003-of-00004.safetensors...
+2025-12-07 21:08:27,691 - src.downloader - INFO - Progress before downloading model-00003-of-00004.safetensors: 28%
+2025-12-07 21:08:27,691 - src.downloader - INFO - Downloading model-00003-of-00004.safetensors...
+2025-12-07 21:08:45,641 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Completed model-00003-of-00004.safetensors
+2025-12-07 21:08:45,641 - src.downloader - INFO - Progress after downloading model-00003-of-00004.safetensors: 42%
+2025-12-07 21:08:45,641 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Downloading model-00004-of-00004.safetensors...
+2025-12-07 21:08:45,641 - src.downloader - INFO - Progress before downloading model-00004-of-00004.safetensors: 42%
+2025-12-07 21:08:45,641 - src.downloader - INFO - Downloading model-00004-of-00004.safetensors...
+2025-12-07 21:08:59,708 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Completed model-00004-of-00004.safetensors
+2025-12-07 21:08:59,708 - src.downloader - INFO - Progress after downloading model-00004-of-00004.safetensors: 57%
+2025-12-07 21:08:59,708 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Downloading model.safetensors.index.json...
+2025-12-07 21:08:59,708 - src.downloader - INFO - Progress before downloading model.safetensors.index.json: 57%
+2025-12-07 21:08:59,708 - src.downloader - INFO - Downloading model.safetensors.index.json...
+2025-12-07 21:08:59,931 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Completed model.safetensors.index.json
+2025-12-07 21:08:59,931 - src.downloader - INFO - Progress after downloading model.safetensors.index.json: 71%
+2025-12-07 21:08:59,931 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Downloading config.json...
+2025-12-07 21:08:59,931 - src.downloader - INFO - Progress before downloading config.json: 71%
+2025-12-07 21:08:59,931 - src.downloader - INFO - Downloading config.json...
+2025-12-07 21:09:00,105 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Completed config.json
+2025-12-07 21:09:00,106 - src.downloader - INFO - Progress after downloading config.json: 85%
+2025-12-07 21:09:00,106 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Downloading tokenizer.json...
+2025-12-07 21:09:00,106 - src.downloader - INFO - Progress before downloading tokenizer.json: 85%
+2025-12-07 21:09:00,106 - src.downloader - INFO - Downloading tokenizer.json...
+2025-12-07 21:09:00,806 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=100%, message=Completed tokenizer.json
+2025-12-07 21:09:00,806 - src.downloader - INFO - Progress after downloading tokenizer.json: 100%
+2025-12-07 21:09:00,806 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 21:09:00,806 - src.downloader - INFO - Successfully downloaded model gemma-2-9b-it
+2025-12-07 21:09:00,852 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 21:09:00,879 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b-it using Modelfile
+2025-12-07 21:09:04,204 - src.model_manager - INFO - Successfully loaded model gemma-2-9b-it
+2025-12-07 21:09:04,214 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:09:04,223 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:13:51,697 - src.server - INFO - Model gemma-2-9b not loaded, attempting to download and load...
+2025-12-07 21:13:51,700 - src.downloader - INFO - Model gemma-2-9b already downloaded
+2025-12-07 21:13:51,755 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b-it
+2025-12-07 21:13:51,785 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 21:13:58,349 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 21:13:58,358 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:13:58,371 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:13:58,380 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:13:58,391 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:17:32,835 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:17:40,488 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:17:46,008 - src.server - INFO - Model gemma-2-9b-it not loaded, attempting to download and load...
+2025-12-07 21:17:46,008 - src.downloader - INFO - Model gemma-2-9b-it already downloaded
+2025-12-07 21:17:46,057 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 21:17:46,088 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b-it using Modelfile
+2025-12-07 21:17:49,274 - src.model_manager - INFO - Successfully loaded model gemma-2-9b-it
+2025-12-07 21:17:49,284 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:17:55,386 - src.server - INFO - Model llama-3.1-8b-instruct not loaded, attempting to download and load...
+2025-12-07 21:17:55,387 - src.downloader - INFO - Downloading model llama-3.1-8b-instruct from meta-llama/Llama-3.1-8B-Instruct
+2025-12-07 21:17:55,387 - src.downloader - INFO - Initializing download progress for llama-3.1-8b-instruct
+2025-12-07 21:17:55,387 - src.downloader - INFO - Progress set for llama-3.1-8b-instruct: status=downloading, progress=0%, message=Starting download...
+2025-12-07 21:17:55,387 - src.downloader - WARNING - Llama models require authentication. Please ensure you have access.
+2025-12-07 21:17:55,387 - src.downloader - WARNING - Visit https://huggingface.co/meta-llama to request access.
+2025-12-07 21:17:55,387 - src.downloader - INFO - Total files to download for llama-3.1-8b-instruct: 7
+2025-12-07 21:17:55,387 - src.downloader - INFO - Progress set for llama-3.1-8b-instruct: status=downloading, progress=0%, message=Downloading model-00001-of-00004.safetensors...
+2025-12-07 21:17:55,387 - src.downloader - INFO - Progress before downloading model-00001-of-00004.safetensors: 0%
+2025-12-07 21:17:55,387 - src.downloader - INFO - Downloading model-00001-of-00004.safetensors...
+2025-12-07 21:18:09,382 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 21:18:09,383 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 21:18:09,767 - src.model_manager - ERROR - Model test failed: [?2026h[?25l[1Gpulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest [K[?25h[?2026l
+Error: pull model manifest: file does not exist
+
+2025-12-07 21:18:09,767 - src.server - WARNING - Failed to load default model
+2025-12-07 21:18:09,767 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 21:18:49,222 - src.model_manager - ERROR - Model test failed: [?2026h[?25l[1Gpulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest [K[?25h[?2026l
+Error: pull model manifest: file does not exist
+
+2025-12-07 21:19:19,427 - src.model_manager - INFO - Successfully loaded model gemma-2-9b-it
+2025-12-07 21:20:22,007 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:21:04,958 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:23:12,767 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 21:23:12,830 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b-it
+2025-12-07 21:23:12,830 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 21:23:14,761 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 21:23:14,762 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 21:23:14,797 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 21:23:21,048 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 21:23:21,048 - src.server - INFO - Default model loaded successfully
+2025-12-07 21:23:21,048 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 21:25:03,850 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 21:25:03,884 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b-it using Modelfile
+2025-12-07 21:25:06,746 - src.model_manager - INFO - Successfully loaded model gemma-2-9b-it
+2025-12-07 21:25:18,272 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:18,283 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:18,307 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:18,318 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:25,472 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:25,483 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:25,511 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:25:25,521 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:26:04,314 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:26:04,324 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:26:04,373 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:26:04,384 - src.model_manager - ERROR - Generation failed: Error: unknown flag: --temperature
+
+2025-12-07 21:48:46,203 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 21:48:46,249 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b-it
+2025-12-07 21:48:46,249 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 21:48:48,583 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 21:48:48,584 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 21:48:48,617 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 21:48:52,122 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 21:48:52,123 - src.server - INFO - Default model loaded successfully
+2025-12-07 21:48:52,123 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 21:49:01,024 - src.server - INFO - Removing model gemma-2-9b-it...
+2025-12-07 21:49:01,043 - src.downloader - INFO - Successfully removed model gemma-2-9b-it
+2025-12-07 21:49:01,043 - src.server - INFO - Model gemma-2-9b-it removed successfully
+2025-12-07 21:49:03,965 - src.server - INFO - Removing model qwen2.5-7b-instruct...
+2025-12-07 21:49:03,988 - src.downloader - INFO - Successfully removed model qwen2.5-7b-instruct
+2025-12-07 21:49:03,988 - src.server - INFO - Model qwen2.5-7b-instruct removed successfully
+2025-12-07 21:49:05,918 - src.server - INFO - Removing model qwen2.5-7b...
+2025-12-07 21:49:05,952 - src.downloader - INFO - Successfully removed model qwen2.5-7b
+2025-12-07 21:49:05,952 - src.server - INFO - Model qwen2.5-7b removed successfully
+2025-12-07 21:49:07,748 - src.server - INFO - Removing model mistral-7b...
+2025-12-07 21:49:07,763 - src.downloader - INFO - Successfully removed model mistral-7b
+2025-12-07 21:49:07,763 - src.server - INFO - Model mistral-7b removed successfully
+2025-12-07 22:03:49,728 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:03:49,777 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 22:03:49,778 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:03:51,341 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:03:51,341 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:03:51,370 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 22:03:54,548 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 22:03:54,550 - src.server - INFO - Default model loaded successfully
+2025-12-07 22:03:54,551 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:04:04,602 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 22:04:09,577 - src.server - INFO - Removing model gemma-2-9b...
+2025-12-07 22:04:09,593 - src.downloader - INFO - Successfully removed model gemma-2-9b
+2025-12-07 22:04:09,593 - src.server - INFO - Model gemma-2-9b removed successfully
+2025-12-07 22:06:42,879 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:06:42,879 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:06:47,593 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:06:47,593 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:06:47,593 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-07 22:06:47,593 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:07:49,748 - src.server - INFO - Removing model llama-3.1-8b-instruct...
+2025-12-07 22:07:49,752 - src.downloader - INFO - Successfully removed model llama-3.1-8b-instruct
+2025-12-07 22:07:49,752 - src.server - INFO - Model llama-3.1-8b-instruct removed successfully
+2025-12-07 22:07:52,528 - src.server - INFO - Removing model phi-3-mini...
+2025-12-07 22:07:52,533 - src.downloader - INFO - Successfully removed model phi-3-mini
+2025-12-07 22:07:52,533 - src.server - INFO - Model phi-3-mini removed successfully
+2025-12-07 22:07:57,449 - src.downloader - INFO - Downloading model gemma-2-9b-it from google/gemma-2-9b-it
+2025-12-07 22:07:57,449 - src.downloader - INFO - Initializing download progress for gemma-2-9b-it
+2025-12-07 22:07:57,449 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Starting download...
+2025-12-07 22:07:57,449 - src.downloader - INFO - Total files to download for gemma-2-9b-it: 7
+2025-12-07 22:07:57,449 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Downloading model-00001-of-00004.safetensors...
+2025-12-07 22:07:57,449 - src.downloader - INFO - Progress before downloading model-00001-of-00004.safetensors: 0%
+2025-12-07 22:07:57,449 - src.downloader - INFO - Downloading model-00001-of-00004.safetensors...
+2025-12-07 22:08:16,371 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Completed model-00001-of-00004.safetensors
+2025-12-07 22:08:16,371 - src.downloader - INFO - Progress after downloading model-00001-of-00004.safetensors: 14%
+2025-12-07 22:08:16,371 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Downloading model-00002-of-00004.safetensors...
+2025-12-07 22:08:16,372 - src.downloader - INFO - Progress before downloading model-00002-of-00004.safetensors: 14%
+2025-12-07 22:08:16,372 - src.downloader - INFO - Downloading model-00002-of-00004.safetensors...
+2025-12-07 22:08:34,412 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Completed model-00002-of-00004.safetensors
+2025-12-07 22:08:34,412 - src.downloader - INFO - Progress after downloading model-00002-of-00004.safetensors: 28%
+2025-12-07 22:08:34,412 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Downloading model-00003-of-00004.safetensors...
+2025-12-07 22:08:34,412 - src.downloader - INFO - Progress before downloading model-00003-of-00004.safetensors: 28%
+2025-12-07 22:08:34,412 - src.downloader - INFO - Downloading model-00003-of-00004.safetensors...
+2025-12-07 22:08:52,448 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Completed model-00003-of-00004.safetensors
+2025-12-07 22:08:52,448 - src.downloader - INFO - Progress after downloading model-00003-of-00004.safetensors: 42%
+2025-12-07 22:08:52,448 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Downloading model-00004-of-00004.safetensors...
+2025-12-07 22:08:52,448 - src.downloader - INFO - Progress before downloading model-00004-of-00004.safetensors: 42%
+2025-12-07 22:08:52,448 - src.downloader - INFO - Downloading model-00004-of-00004.safetensors...
+2025-12-07 22:09:06,406 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Completed model-00004-of-00004.safetensors
+2025-12-07 22:09:06,406 - src.downloader - INFO - Progress after downloading model-00004-of-00004.safetensors: 57%
+2025-12-07 22:09:06,406 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Downloading model.safetensors.index.json...
+2025-12-07 22:09:06,406 - src.downloader - INFO - Progress before downloading model.safetensors.index.json: 57%
+2025-12-07 22:09:06,406 - src.downloader - INFO - Downloading model.safetensors.index.json...
+2025-12-07 22:09:06,592 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Completed model.safetensors.index.json
+2025-12-07 22:09:06,592 - src.downloader - INFO - Progress after downloading model.safetensors.index.json: 71%
+2025-12-07 22:09:06,592 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Downloading config.json...
+2025-12-07 22:09:06,592 - src.downloader - INFO - Progress before downloading config.json: 71%
+2025-12-07 22:09:06,592 - src.downloader - INFO - Downloading config.json...
+2025-12-07 22:09:06,772 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Completed config.json
+2025-12-07 22:09:06,772 - src.downloader - INFO - Progress after downloading config.json: 85%
+2025-12-07 22:09:06,772 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Downloading tokenizer.json...
+2025-12-07 22:09:06,772 - src.downloader - INFO - Progress before downloading tokenizer.json: 85%
+2025-12-07 22:09:06,772 - src.downloader - INFO - Downloading tokenizer.json...
+2025-12-07 22:09:07,914 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=100%, message=Completed tokenizer.json
+2025-12-07 22:09:07,914 - src.downloader - INFO - Progress after downloading tokenizer.json: 100%
+2025-12-07 22:09:07,914 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 22:09:07,914 - src.downloader - INFO - Successfully downloaded model gemma-2-9b-it
+2025-12-07 22:09:59,095 - src.server - INFO - Removing model gemma-2-9b-it...
+2025-12-07 22:09:59,111 - src.downloader - INFO - Successfully removed model gemma-2-9b-it
+2025-12-07 22:09:59,111 - src.server - INFO - Model gemma-2-9b-it removed successfully
+2025-12-07 22:18:00,470 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:18:00,470 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:18:02,164 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:18:02,164 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:18:02,164 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-07 22:18:02,164 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:21:06,210 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:21:06,210 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:21:07,836 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:21:07,836 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:21:07,836 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-07 22:21:07,836 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:26:19,330 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:26:19,331 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:26:24,517 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:26:24,517 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:26:24,517 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-07 22:26:24,517 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:41:56,686 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 22:41:56,686 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 22:41:58,366 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 22:41:58,366 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 22:41:58,366 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-07 22:41:58,366 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 22:54:27,121 - src.downloader - INFO - Downloading model gemma-2-9b from google/gemma-2-9b-it
+2025-12-07 22:54:27,121 - src.downloader - INFO - Initializing download progress for gemma-2-9b
+2025-12-07 22:54:27,121 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=0%, message=Starting download...
+2025-12-07 22:54:27,121 - src.downloader - INFO - Total files to download for gemma-2-9b: 7
+2025-12-07 22:54:27,121 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=0%, message=Downloading model-00001-of-00004.safetensors...
+2025-12-07 22:54:27,121 - src.downloader - INFO - Progress before downloading model-00001-of-00004.safetensors: 0%
+2025-12-07 22:54:27,121 - src.downloader - INFO - Downloading model-00001-of-00004.safetensors...
+2025-12-07 22:54:45,609 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=14%, message=Completed model-00001-of-00004.safetensors
+2025-12-07 22:54:45,609 - src.downloader - INFO - Progress after downloading model-00001-of-00004.safetensors: 14%
+2025-12-07 22:54:45,609 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=14%, message=Downloading model-00002-of-00004.safetensors...
+2025-12-07 22:54:45,609 - src.downloader - INFO - Progress before downloading model-00002-of-00004.safetensors: 14%
+2025-12-07 22:54:45,609 - src.downloader - INFO - Downloading model-00002-of-00004.safetensors...
+2025-12-07 22:55:02,993 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=28%, message=Completed model-00002-of-00004.safetensors
+2025-12-07 22:55:02,993 - src.downloader - INFO - Progress after downloading model-00002-of-00004.safetensors: 28%
+2025-12-07 22:55:02,993 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=28%, message=Downloading model-00003-of-00004.safetensors...
+2025-12-07 22:55:02,993 - src.downloader - INFO - Progress before downloading model-00003-of-00004.safetensors: 28%
+2025-12-07 22:55:02,993 - src.downloader - INFO - Downloading model-00003-of-00004.safetensors...
+2025-12-07 22:55:20,813 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=42%, message=Completed model-00003-of-00004.safetensors
+2025-12-07 22:55:20,814 - src.downloader - INFO - Progress after downloading model-00003-of-00004.safetensors: 42%
+2025-12-07 22:55:20,814 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=42%, message=Downloading model-00004-of-00004.safetensors...
+2025-12-07 22:55:20,814 - src.downloader - INFO - Progress before downloading model-00004-of-00004.safetensors: 42%
+2025-12-07 22:55:20,814 - src.downloader - INFO - Downloading model-00004-of-00004.safetensors...
+2025-12-07 22:55:34,623 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=57%, message=Completed model-00004-of-00004.safetensors
+2025-12-07 22:55:34,623 - src.downloader - INFO - Progress after downloading model-00004-of-00004.safetensors: 57%
+2025-12-07 22:55:34,623 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=57%, message=Downloading model.safetensors.index.json...
+2025-12-07 22:55:34,623 - src.downloader - INFO - Progress before downloading model.safetensors.index.json: 57%
+2025-12-07 22:55:34,623 - src.downloader - INFO - Downloading model.safetensors.index.json...
+2025-12-07 22:55:34,799 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=71%, message=Completed model.safetensors.index.json
+2025-12-07 22:55:34,799 - src.downloader - INFO - Progress after downloading model.safetensors.index.json: 71%
+2025-12-07 22:55:34,799 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=71%, message=Downloading config.json...
+2025-12-07 22:55:34,799 - src.downloader - INFO - Progress before downloading config.json: 71%
+2025-12-07 22:55:34,799 - src.downloader - INFO - Downloading config.json...
+2025-12-07 22:55:34,953 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=85%, message=Completed config.json
+2025-12-07 22:55:34,953 - src.downloader - INFO - Progress after downloading config.json: 85%
+2025-12-07 22:55:34,953 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=85%, message=Downloading tokenizer.json...
+2025-12-07 22:55:34,953 - src.downloader - INFO - Progress before downloading tokenizer.json: 85%
+2025-12-07 22:55:34,953 - src.downloader - INFO - Downloading tokenizer.json...
+2025-12-07 22:55:35,728 - src.downloader - INFO - Progress set for gemma-2-9b: status=downloading, progress=100%, message=Completed tokenizer.json
+2025-12-07 22:55:35,728 - src.downloader - INFO - Progress after downloading tokenizer.json: 100%
+2025-12-07 22:55:35,728 - src.downloader - INFO - Progress set for gemma-2-9b: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 22:55:35,728 - src.downloader - INFO - Successfully downloaded model gemma-2-9b
+2025-12-07 22:55:37,745 - src.server - INFO - Progress endpoint called for gemma-2-9b, returning: {'status': 'completed', 'progress': 100, 'message': 'Download completed successfully'}
+2025-12-07 23:04:56,809 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:04:56,809 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:04:59,752 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:04:59,752 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:04:59,785 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:05:06,634 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:05:06,634 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:05:06,634 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:05:26,642 - src.downloader - INFO - Downloading model gemma-2-9b-it from google/gemma-2-9b-it
+2025-12-07 23:05:26,642 - src.downloader - INFO - Initializing download progress for gemma-2-9b-it
+2025-12-07 23:05:26,642 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Starting download...
+2025-12-07 23:05:26,642 - src.downloader - INFO - Total files to download for gemma-2-9b-it: 7
+2025-12-07 23:05:26,643 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=0%, message=Downloading model-00001-of-00004.safetensors...
+2025-12-07 23:05:26,643 - src.downloader - INFO - Progress before downloading model-00001-of-00004.safetensors: 0%
+2025-12-07 23:05:26,643 - src.downloader - INFO - Downloading model-00001-of-00004.safetensors...
+2025-12-07 23:05:45,091 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Completed model-00001-of-00004.safetensors
+2025-12-07 23:05:45,091 - src.downloader - INFO - Progress after downloading model-00001-of-00004.safetensors: 14%
+2025-12-07 23:05:45,091 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=14%, message=Downloading model-00002-of-00004.safetensors...
+2025-12-07 23:05:45,091 - src.downloader - INFO - Progress before downloading model-00002-of-00004.safetensors: 14%
+2025-12-07 23:05:45,091 - src.downloader - INFO - Downloading model-00002-of-00004.safetensors...
+2025-12-07 23:06:03,127 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Completed model-00002-of-00004.safetensors
+2025-12-07 23:06:03,127 - src.downloader - INFO - Progress after downloading model-00002-of-00004.safetensors: 28%
+2025-12-07 23:06:03,127 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=28%, message=Downloading model-00003-of-00004.safetensors...
+2025-12-07 23:06:03,127 - src.downloader - INFO - Progress before downloading model-00003-of-00004.safetensors: 28%
+2025-12-07 23:06:03,127 - src.downloader - INFO - Downloading model-00003-of-00004.safetensors...
+2025-12-07 23:06:21,068 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Completed model-00003-of-00004.safetensors
+2025-12-07 23:06:21,068 - src.downloader - INFO - Progress after downloading model-00003-of-00004.safetensors: 42%
+2025-12-07 23:06:21,068 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=42%, message=Downloading model-00004-of-00004.safetensors...
+2025-12-07 23:06:21,068 - src.downloader - INFO - Progress before downloading model-00004-of-00004.safetensors: 42%
+2025-12-07 23:06:21,068 - src.downloader - INFO - Downloading model-00004-of-00004.safetensors...
+2025-12-07 23:06:35,260 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Completed model-00004-of-00004.safetensors
+2025-12-07 23:06:35,260 - src.downloader - INFO - Progress after downloading model-00004-of-00004.safetensors: 57%
+2025-12-07 23:06:35,260 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=57%, message=Downloading model.safetensors.index.json...
+2025-12-07 23:06:35,260 - src.downloader - INFO - Progress before downloading model.safetensors.index.json: 57%
+2025-12-07 23:06:35,260 - src.downloader - INFO - Downloading model.safetensors.index.json...
+2025-12-07 23:06:35,437 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Completed model.safetensors.index.json
+2025-12-07 23:06:35,437 - src.downloader - INFO - Progress after downloading model.safetensors.index.json: 71%
+2025-12-07 23:06:35,437 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=71%, message=Downloading config.json...
+2025-12-07 23:06:35,437 - src.downloader - INFO - Progress before downloading config.json: 71%
+2025-12-07 23:06:35,437 - src.downloader - INFO - Downloading config.json...
+2025-12-07 23:06:35,601 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Completed config.json
+2025-12-07 23:06:35,601 - src.downloader - INFO - Progress after downloading config.json: 85%
+2025-12-07 23:06:35,601 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=85%, message=Downloading tokenizer.json...
+2025-12-07 23:06:35,601 - src.downloader - INFO - Progress before downloading tokenizer.json: 85%
+2025-12-07 23:06:35,601 - src.downloader - INFO - Downloading tokenizer.json...
+2025-12-07 23:06:36,265 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=downloading, progress=100%, message=Completed tokenizer.json
+2025-12-07 23:06:36,266 - src.downloader - INFO - Progress after downloading tokenizer.json: 100%
+2025-12-07 23:06:36,266 - src.downloader - INFO - Progress set for gemma-2-9b-it: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 23:06:36,266 - src.downloader - INFO - Successfully downloaded model gemma-2-9b-it
+2025-12-07 23:10:52,997 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:10:53,047 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:10:53,047 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:10:58,440 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:10:58,440 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:10:58,476 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:11:03,207 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:11:03,207 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:11:03,207 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:12:10,727 - src.downloader - INFO - Downloading GGUF model qwen2.5-7b-instruct from bartowski/Qwen2.5-7B-Instruct-GGUF
+2025-12-07 23:12:10,955 - src.downloader - INFO - Progress set for qwen2.5-7b-instruct-gguf: status=downloading, progress=0%, message=Starting download...
+2025-12-07 23:12:10,955 - src.downloader - INFO - Downloading GGUF file: Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:12:23,987 - src.downloader - INFO - Progress set for qwen2.5-7b-instruct-gguf: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 23:12:23,987 - src.downloader - INFO - Successfully downloaded GGUF model qwen2.5-7b-instruct
+2025-12-07 23:12:26,001 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:28,007 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:30,007 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:32,004 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:34,002 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:36,007 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:37,994 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:40,000 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:41,998 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:43,997 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:46,004 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:47,992 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:50,004 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:52,002 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:54,002 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:56,011 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:12:58,009 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:13:00,000 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:13:01,999 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:13:03,998 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:13:06,051 - src.server - INFO - Progress endpoint called for qwen2.5-7b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-07 23:18:18,732 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:18:18,780 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:18:18,780 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:18:41,419 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:18:41,419 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:18:41,459 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:18:45,524 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:18:45,524 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:18:45,524 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:20:28,563 - src.downloader - INFO - Downloading GGUF model qwen2.5-7b from bartowski/Qwen2.5-7B-Instruct-GGUF
+2025-12-07 23:20:28,787 - src.downloader - INFO - Progress set for qwen2.5-7b-gguf: status=downloading, progress=0%, message=Starting download...
+2025-12-07 23:20:28,787 - src.downloader - INFO - Downloading GGUF file: Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:20:41,517 - src.downloader - INFO - Progress set for qwen2.5-7b-gguf: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 23:20:41,517 - src.downloader - INFO - Successfully downloaded GGUF model qwen2.5-7b
+2025-12-07 23:20:43,528 - src.server - INFO - Progress endpoint called for qwen2.5-7b, returning: {'status': 'completed', 'progress': 100, 'message': 'Download completed successfully'}
+2025-12-07 23:21:56,678 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:22:11,356 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:22:11,356 - src.model_manager - ERROR - Error loading model qwen2.5-7b-instruct: 'NoneType' object has no attribute 'glob'
+2025-12-07 23:22:57,131 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:22:57,131 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:23:20,637 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:23:20,638 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:23:20,673 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:23:20,673 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-07 23:23:23,930 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:23:23,930 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:23:23,930 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:23:51,168 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:23:51,169 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:23:51,928 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:23:51,928 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:23:51,928 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:24:03,391 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:24:10,090 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:24:10,090 - src.model_manager - INFO - Using local GGUF file: models/qwen2.5-7b-instruct-gguf/Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:24:10,100 - src.model_manager - ERROR - Failed to create Ollama model: [?2026h[?25l[1Ggathering model components [K[?25h[?2026l
+Error: 400 Bad Request: invalid model name
+
+2025-12-07 23:24:28,467 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:24:28,467 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:24:56,733 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:24:56,733 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:24:56,767 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:24:56,767 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-07 23:25:00,233 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:25:00,233 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:25:00,233 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:25:12,431 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:25:12,460 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:25:12,460 - src.model_manager - INFO - Using local GGUF file: /home/juhur/PROJECTS/LocalLLM/models/qwen2.5-7b-instruct-gguf/Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:25:41,168 - src.model_manager - INFO - Successfully loaded model qwen2.5-7b-instruct
+2025-12-07 23:25:54,756 - src.model_manager - INFO - Successfully unloaded model qwen2.5-7b-instruct
+2025-12-07 23:26:01,609 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b-it using Modelfile
+2025-12-07 23:26:01,610 - src.model_manager - INFO - Using base model: gemma2:9b-instruct
+2025-12-07 23:26:01,947 - src.model_manager - ERROR - Failed to create Ollama model: [?2026h[?25l[1Ggathering model components [K
+pulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[A[1Ggathering model components [K
+pulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[A[1Ggathering model components [K
+pulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[A[1Ggathering model components [K
+pulling manifest [K[?25h[?2026l
+Error: pull model manifest: file does not exist
+
+2025-12-07 23:26:38,456 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:26:38,456 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:26:58,549 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:26:58,550 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:26:58,583 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:26:58,583 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-07 23:27:01,984 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:27:01,985 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:27:01,985 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:28:54,817 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:28:54,818 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:28:56,219 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:28:56,219 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:28:56,219 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:29:48,762 - src.downloader - INFO - Downloading GGUF model llama-3.1-8b from bartowski/Llama-3.1-8B-Instruct-GGUF
+2025-12-07 23:29:48,973 - src.downloader - ERROR - Failed to download GGUF model: 404 Client Error. (Request ID: Root=1-6936624c-6db547a26edee01c5fb671ba;7fa8487b-6047-4427-a999-73a23bff11b1)
+
+Repository Not Found for url: https://huggingface.co/api/models/bartowski/Llama-3.1-8B-Instruct-GGUF/tree/main?recursive=True&expand=False.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-12-07 23:29:55,314 - src.downloader - INFO - Downloading GGUF model llama-3.1-8b-instruct from bartowski/Llama-3.1-8B-Instruct-GGUF
+2025-12-07 23:29:55,390 - src.downloader - ERROR - Failed to download GGUF model: 404 Client Error. (Request ID: Root=1-69366253-0a71dcd644af0f2559f110d2;e4f78e30-290f-426d-a2a5-262829763d20)
+
+Repository Not Found for url: https://huggingface.co/api/models/bartowski/Llama-3.1-8B-Instruct-GGUF/tree/main?recursive=True&expand=False.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-12-07 23:29:59,986 - src.downloader - INFO - Downloading GGUF model mistral-7b from TheBloke/Mistral-7B-Instruct-v0.3-GGUF
+2025-12-07 23:30:00,069 - src.downloader - ERROR - Failed to download GGUF model: 404 Client Error. (Request ID: Root=1-69366258-629b6a1c202852356179c156;0e60ef9d-3a33-4f8c-9110-b6f561a258d4)
+
+Repository Not Found for url: https://huggingface.co/api/models/TheBloke/Mistral-7B-Instruct-v0.3-GGUF/tree/main?recursive=True&expand=False.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-12-07 23:30:03,642 - src.downloader - ERROR - No GGUF version available for model phi-3-mini
+2025-12-07 23:31:00,035 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:31:05,977 - src.server - INFO - Removing model gemma-2-9b-it...
+2025-12-07 23:31:06,867 - src.downloader - INFO - Successfully removed model gemma-2-9b-it
+2025-12-07 23:31:06,867 - src.server - INFO - Model gemma-2-9b-it removed successfully
+2025-12-07 23:34:07,892 - src.server - INFO - Removing model qwen2.5-7b...
+2025-12-07 23:34:07,892 - src.downloader - WARNING - Model qwen2.5-7b not found locally
+2025-12-07 23:34:07,892 - src.server - ERROR - Failed to remove model qwen2.5-7b
+2025-12-07 23:34:15,348 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:34:15,348 - src.model_manager - INFO - Using local GGUF file: /home/juhur/PROJECTS/LocalLLM/models/qwen2.5-7b-instruct-gguf/Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:34:21,367 - src.model_manager - INFO - Successfully loaded model qwen2.5-7b-instruct
+2025-12-07 23:34:28,265 - src.model_manager - INFO - Successfully unloaded model qwen2.5-7b-instruct
+2025-12-07 23:35:11,667 - src.downloader - INFO - Downloading GGUF model gemma-2-9b-it from bartowski/gemma-2-9b-it-GGUF
+2025-12-07 23:35:11,895 - src.downloader - INFO - Progress set for gemma-2-9b-it-gguf: status=downloading, progress=0%, message=Starting download...
+2025-12-07 23:35:11,895 - src.downloader - INFO - Downloading GGUF file: gemma-2-9b-it-IQ2_M.gguf
+2025-12-07 23:35:27,046 - src.downloader - INFO - Progress set for gemma-2-9b-it-gguf: status=completed, progress=100%, message=Download completed successfully
+2025-12-07 23:35:27,047 - src.downloader - INFO - Successfully downloaded GGUF model gemma-2-9b-it
+2025-12-07 23:35:29,059 - src.server - INFO - Progress endpoint called for gemma-2-9b-it, returning: {'status': 'completed', 'progress': 100, 'message': 'Download completed successfully'}
+2025-12-07 23:36:14,072 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:36:14,072 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-07 23:36:17,653 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:36:27,165 - src.model_manager - INFO - Model gemma-2-9b already loaded
+2025-12-07 23:40:24,024 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-07 23:40:28,322 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:40:28,322 - src.model_manager - INFO - Using local GGUF file: /home/juhur/PROJECTS/LocalLLM/models/qwen2.5-7b-instruct-gguf/Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:40:39,321 - src.model_manager - INFO - Successfully loaded model qwen2.5-7b-instruct
+2025-12-07 23:40:45,486 - src.server - INFO - Removing model qwen2.5-7b-instruct...
+2025-12-07 23:40:45,486 - src.server - INFO - Unloading model qwen2.5-7b-instruct before removal...
+2025-12-07 23:40:45,524 - src.model_manager - INFO - Successfully unloaded model qwen2.5-7b-instruct
+2025-12-07 23:40:45,524 - src.downloader - WARNING - Model qwen2.5-7b-instruct not found locally
+2025-12-07 23:40:45,524 - src.server - ERROR - Failed to remove model qwen2.5-7b-instruct
+2025-12-07 23:41:52,904 - src.model_manager - INFO - Creating Ollama model locallm-qwen2.5-7b-instruct using Modelfile
+2025-12-07 23:41:52,904 - src.model_manager - INFO - Using local GGUF file: /home/juhur/PROJECTS/LocalLLM/models/qwen2.5-7b-instruct-gguf/Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-07 23:42:04,612 - src.model_manager - INFO - Successfully loaded model qwen2.5-7b-instruct
+2025-12-07 23:42:10,150 - src.model_manager - INFO - Successfully unloaded model qwen2.5-7b-instruct
+2025-12-07 23:42:15,251 - src.server - INFO - Removing model phi-3-mini...
+2025-12-07 23:42:15,251 - src.downloader - INFO - Successfully removed model phi-3-mini
+2025-12-07 23:42:15,251 - src.server - INFO - Model phi-3-mini removed successfully
+2025-12-07 23:45:05,994 - src.server - INFO - Removing model gemma-2-9b-it...
+2025-12-07 23:45:05,994 - src.downloader - WARNING - Model gemma-2-9b-it not found locally
+2025-12-07 23:45:05,994 - src.server - ERROR - Failed to remove model gemma-2-9b-it
+2025-12-07 23:45:11,575 - src.server - INFO - Removing model qwen2.5-7b...
+2025-12-07 23:45:11,575 - src.downloader - WARNING - Model qwen2.5-7b not found locally
+2025-12-07 23:45:11,575 - src.server - ERROR - Failed to remove model qwen2.5-7b
+2025-12-07 23:45:50,305 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-07 23:45:50,305 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-07 23:45:54,344 - src.server - INFO - Starting LocalLLM server...
+2025-12-07 23:45:54,345 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-07 23:45:54,378 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-07 23:45:54,378 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-07 23:45:57,740 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-07 23:45:57,740 - src.server - INFO - Default model loaded successfully
+2025-12-07 23:45:57,740 - src.server - INFO - LocalLLM server started successfully
+2025-12-07 23:46:06,046 - src.server - INFO - Removing model mistral-7b...
+2025-12-07 23:46:06,047 - src.downloader - INFO - Successfully removed model mistral-7b
+2025-12-07 23:46:06,047 - src.server - INFO - Model mistral-7b removed successfully
+2025-12-08 12:28:40,780 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-08 12:28:40,825 - src.model_manager - INFO - Successfully unloaded model gemma-2-9b
+2025-12-08 12:28:40,826 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-08 13:17:49,779 - src.server - INFO - Starting LocalLLM server...
+2025-12-08 13:17:49,779 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-08 13:17:49,815 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-08 13:17:49,815 - src.model_manager - INFO - Using base model: gemma2:9b
+2025-12-08 13:17:56,489 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-08 13:17:56,489 - src.server - INFO - Default model loaded successfully
+2025-12-08 13:17:56,489 - src.server - INFO - LocalLLM server started successfully
+2025-12-08 13:19:57,133 - src.server - INFO - Starting LocalLLM server...
+2025-12-08 13:19:57,133 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-08 13:19:57,885 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-08 13:19:57,885 - src.server - INFO - Default model loaded successfully
+2025-12-08 13:19:57,885 - src.server - INFO - LocalLLM server started successfully

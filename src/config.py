@@ -22,9 +22,9 @@ class ModelsConfig(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="models_")
 
     storage_dir: str = "./models"
-    default_model: str = ""
+    default_model: str = "gemma-2-9b"
     max_loaded_models: int = 1
-    auto_download: bool = True
+    auto_download: bool = False
     supported_formats: list = ["gguf", "safetensors", "pytorch"]
 
 

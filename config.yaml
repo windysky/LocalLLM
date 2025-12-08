@@ -12,13 +12,15 @@ models:
   storage_dir: "./models"
 
   # Default model to load on startup (empty = no model loaded)
-  default_model: ""
+  # Default model to load on startup (if present). Fallback logic in code will
+  # prefer gemma-2-9b if available, otherwise mistral-7b, otherwise first in registry.
+  default_model: "gemma-2-9b"
 
   # Maximum number of models to keep loaded simultaneously
   max_loaded_models: 1
 
   # Auto-download models when requested
-  auto_download: true
+  auto_download: false
 
   # Supported model formats
   supported_formats:
