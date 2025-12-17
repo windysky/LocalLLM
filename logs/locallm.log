@@ -921,3 +921,49 @@ If you are trying to access a private or gated repo, make sure you are authentic
 2025-12-08 13:19:57,885 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
 2025-12-08 13:19:57,885 - src.server - INFO - Default model loaded successfully
 2025-12-08 13:19:57,885 - src.server - INFO - LocalLLM server started successfully
+2025-12-10 14:34:04,594 - src.server - INFO - Starting LocalLLM server...
+2025-12-10 14:34:04,594 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-10 14:34:04,595 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-10 14:34:04,595 - src.server - INFO - LocalLLM server started successfully
+2025-12-10 14:57:25,410 - src.downloader - INFO - Downloading GGUF model llama-3.1-8b-instruct from bartowski/Llama-3.1-8B-Instruct-GGUF
+2025-12-10 14:57:25,840 - src.downloader - ERROR - Failed to download GGUF model: 401 Client Error. (Request ID: Root=1-6939deb5-5eb6f915543cf4b36b8fdbcc;80e679fb-18c2-45f6-80ab-97c05ba39f44)
+
+Repository Not Found for url: https://huggingface.co/api/models/bartowski/Llama-3.1-8B-Instruct-GGUF/tree/main?recursive=True&expand=False.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
+2025-12-10 14:58:35,863 - src.server - INFO - Shutting down LocalLLM server...
+2025-12-10 14:58:35,863 - src.server - INFO - LocalLLM server shutdown complete
+2025-12-10 14:58:38,732 - src.server - INFO - Starting LocalLLM server...
+2025-12-10 14:58:38,732 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-10 14:58:38,732 - src.server - INFO - Default model gemma-2-9b not downloaded; skipping load (auto_download disabled)
+2025-12-10 14:58:38,732 - src.server - INFO - LocalLLM server started successfully
+2025-12-10 14:58:51,280 - src.downloader - INFO - Model llama-3.1-8b-instruct (gguf) already downloaded
+2025-12-10 14:58:53,301 - src.server - INFO - Progress endpoint called for llama-3.1-8b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-10 14:58:55,287 - src.server - INFO - Progress endpoint called for llama-3.1-8b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-10 14:58:57,285 - src.server - INFO - Progress endpoint called for llama-3.1-8b-instruct, returning: {'status': 'not_started', 'progress': 0}
+2025-12-10 14:59:25,060 - src.downloader - INFO - Downloading GGUF model qwen2.5-7b from bartowski/Qwen2.5-7B-Instruct-GGUF
+2025-12-10 14:59:25,282 - src.downloader - INFO - Progress set for qwen2.5-7b-gguf: status=downloading, progress=0%, message=Starting download...
+2025-12-10 14:59:25,282 - src.downloader - INFO - Downloading GGUF file: Qwen2.5-7B-Instruct-IQ2_M.gguf
+2025-12-10 14:59:53,484 - src.downloader - INFO - Progress set for qwen2.5-7b-gguf: status=completed, progress=100%, message=Download completed successfully
+2025-12-10 14:59:53,484 - src.downloader - INFO - Successfully downloaded GGUF model qwen2.5-7b
+2025-12-10 14:59:55,850 - src.server - INFO - Progress endpoint called for qwen2.5-7b, returning: {'status': 'completed', 'progress': 100, 'message': 'Download completed successfully'}
+2025-12-10 15:01:55,436 - src.downloader - INFO - Downloading GGUF model mistral-7b from TheBloke/Mistral-7B-Instruct-v0.3-GGUF
+2025-12-10 15:01:56,034 - src.downloader - ERROR - Failed to download GGUF model: 404 Client Error. (Request ID: Root=1-6939dfc3-7f6dd91b40bebc73639055fa;9a239b0a-9508-4e29-bee2-0651980b41c6)
+
+Repository Not Found for url: https://huggingface.co/api/models/TheBloke/Mistral-7B-Instruct-v0.3-GGUF/tree/main?recursive=True&expand=False.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+2025-12-10 15:02:01,379 - src.downloader - ERROR - No GGUF version available for model phi-3-mini
+2025-12-10 15:02:09,065 - src.downloader - INFO - Downloading GGUF model gemma-2-9b from bartowski/gemma-2-9b-it-GGUF
+2025-12-10 15:02:09,166 - src.downloader - INFO - Progress set for gemma-2-9b-gguf: status=downloading, progress=0%, message=Starting download...
+2025-12-10 15:02:09,166 - src.downloader - INFO - Downloading GGUF file: gemma-2-9b-it-IQ2_M.gguf
+2025-12-10 15:02:40,647 - src.downloader - INFO - Progress set for gemma-2-9b-gguf: status=completed, progress=100%, message=Download completed successfully
+2025-12-10 15:02:40,647 - src.downloader - INFO - Successfully downloaded GGUF model gemma-2-9b
+2025-12-16 17:02:17,959 - src.server - INFO - Starting LocalLLM server...
+2025-12-16 17:02:17,962 - src.server - INFO - Selected default model: gemma-2-9b
+2025-12-16 17:02:18,001 - src.model_manager - INFO - Creating Ollama model locallm-gemma-2-9b using Modelfile
+2025-12-16 17:02:18,001 - src.model_manager - INFO - Using local GGUF file: /home/juhur/PROJECTS/LocalLLM/models/gemma-2-9b-gguf/gemma-2-9b-it-IQ2_M.gguf
+2025-12-16 17:02:31,823 - src.model_manager - INFO - Successfully loaded model gemma-2-9b
+2025-12-16 17:02:31,823 - src.server - INFO - Default model loaded successfully
+2025-12-16 17:02:31,823 - src.server - INFO - LocalLLM server started successfully

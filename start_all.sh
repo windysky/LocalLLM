@@ -39,7 +39,7 @@ fi
 
 # Start API server in background
 echo "Starting API server on port 8000..."
-/home/juhur/miniconda3/envs/locallm/bin/python cli/start_server.py > /tmp/locallm_api.log 2>&1 &
+python cli/start_server.py > /tmp/locallm_api.log 2>&1 &
 API_PID=$!
 echo "API server PID: $API_PID"
 # Wait for API server to start (up to 30s)
@@ -60,7 +60,7 @@ if ! curl -s http://localhost:8000/health > /dev/null; then
 fi
 # Start web interface
 echo "Starting web interface on port 8080..."
-/home/juhur/miniconda3/envs/locallm/bin/python web/app.py --port 8080 > /tmp/locallm_web.log 2>&1 &
+python web/app.py --port 8080 > /tmp/locallm_web.log 2>&1 &
 WEB_PID=$!
 echo "Web interface PID: $WEB_PID"
 

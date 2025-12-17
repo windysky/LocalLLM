@@ -31,11 +31,11 @@ fi
 # Only stop processes with exact path matches to avoid affecting other apps
 echo "Cleaning up LocalLLM processes..."
 
-# Stop LocalLLM API server (exact match)
-pkill -f "/home/juhur/PROJECTS/LocalLLM/cli/start_server.py" 2>/dev/null
+# Stop LocalLLM API server (match by script name)
+pkill -f "cli/start_server.py" 2>/dev/null
 
-# Stop LocalLLM web interface (exact match)
-pkill -f "/home/juhur/PROJECTS/LocalLLM/web/app.py" 2>/dev/null
+# Stop LocalLLM web interface (match by script name)
+pkill -f "web/app.py" 2>/dev/null
 
 # Check if port 8000 is still in use by LocalLLM
 API_PORT_PIDS=$(lsof -ti:8000 2>/dev/null | tr '\n' ' ')
